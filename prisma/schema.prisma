@@ -1,4 +1,3 @@
-
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -8,11 +7,69 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Users {
+  id                String          @id @default(uuid())
+  email             String          @unique
+  name              String?
+  is_Professor      Boolean
+  student_score     Student_score   @relation(fields: [student_scoreId], references: [id])
+  classrom          Classrooms      @relation(fields: [classroomsId], references: [id])
+  student_answers   Student_answers @relation(fields: [student_answersId], references: [id])
+  asks              Asks[]
+  student_scoreId   String
+  classroomsId      String
+  student_answersId String
+}
 
+model Classrooms {
+  id     String   @id @default(uuid())
+  title  String
+  topics Topics[]
+  Users  Users[]
+}
 
-model User {
-  id    Int     @default(autoincrement()) @id
-  email String  @unique
-  name  String?
-  is_Professor Boolean
+model Topics {
+  id            String          @id @default(uuid())
+  student_score Student_score[]
+  asks          Asks[]
+  Classrooms    Classrooms?     @relation(fields: [classroomsId], references: [id])
+  classroomsId  String?
+}
+
+model Student_score {
+  id       String  @id @default(uuid())
+  score    Float
+  asks     Asks[]
+  Users    Users[]
+  Topics   Topics? @relation(fields: [topicsId], references: [id])
+  topicsId String?
+}
+
+model Asks {
+  id              String            @id @default(uuid())
+  title           String
+  answers         Answers[]
+  Users           Users?            @relation(fields: [usersId], references: [id])
+  usersId         String?
+  Topics          Topics?           @relation(fields: [topicsId], references: [id])
+  topicsId        String?
+  Student_score   Student_score?    @relation(fields: [student_scoreId], references: [id])
+  student_scoreId String?
+  Student_answers Student_answers[]
+}
+
+model Answers {
+  id         String  @id @default(uuid())
+  title      String
+  is_correct Boolean
+  ask        Asks    @relation(fields: [asksId], references: [id])
+  asksId     String
+}
+
+model Student_answers {
+  id     String  @id @default(uuid())
+  title  String
+  ask    Asks    @relation(fields: [asksId], references: [id])
+  Users  Users[]
+  asksId String
 }

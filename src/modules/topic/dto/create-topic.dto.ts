@@ -1,1 +1,1 @@
-export class CreateTopicDto {}
+export class TopicDto {}

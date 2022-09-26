@@ -1,22 +1,13 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { AnswersService } from './answers.service';
-import { CreateAnswerDto } from './dto/create-answer.dto';
-import { UpdateAnswerDto } from './dto/update-answer.dto';
+import { AnswerDto } from './dto/answer.dto';
 
 @Controller('answers')
 export class AnswersController {
   constructor(private readonly answersService: AnswersService) {}
 
   @Post()
-  create(@Body() createAnswerDto: CreateAnswerDto) {
+  create(@Body() createAnswerDto: AnswerDto) {
     return this.answersService.create(createAnswerDto);
   }
 
@@ -28,15 +19,5 @@ export class AnswersController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.answersService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAnswerDto: UpdateAnswerDto) {
-    return this.answersService.update(+id, updateAnswerDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.answersService.remove(+id);
   }
 }

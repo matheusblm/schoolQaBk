@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 
@@ -7,8 +7,15 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() createUserDto: UserDto) {
-    return this.userService.create(createUserDto);
+  create(
+    @Query('professor') professor: string,
+    @Body() createUserDto: UserDto,
+  ) {
+    if (professor) {
+      return this.userService.create(createUserDto, true);
+    } else {
+      return this.userService.create(createUserDto, false);
+    }
   }
 
   @Get()

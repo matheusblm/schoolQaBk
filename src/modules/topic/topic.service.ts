@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTopicDto } from './dto/create-topic.dto';
-import { UpdateTopicDto } from './dto/update-topic.dto';
+import { TopicDto } from './dto/create-topic.dto';
 
 @Injectable()
 export class TopicService {
-  create(createTopicDto: CreateTopicDto) {
+  create(createTopicDto: TopicDto) {
     return 'This action adds a new topic';
   }
 
@@ -14,13 +13,5 @@ export class TopicService {
 
   findOne(id: number) {
     return `This action returns a #${id} topic`;
-  }
-
-  update(id: number, updateTopicDto: UpdateTopicDto) {
-    return `This action updates a #${id} topic`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} topic`;
   }
 }

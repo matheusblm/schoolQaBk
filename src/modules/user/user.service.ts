@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createUser: UserDto) {
+  async create(createUser: UserDto, professor: boolean) {
     const userExist = await this.prisma.users.findFirst({
       where: {
         email: createUser.email,
@@ -27,6 +27,7 @@ export class UserService {
       data: {
         ...userWithPassword,
         student_score: { create: { score: 0 } },
+        is_Professor: professor,
       },
     });
 

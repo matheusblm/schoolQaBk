@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateClassroomDto } from './dto/create-classroom.dto';
-import { UpdateClassroomDto } from './dto/update-classroom.dto';
+import { ClassroomDto } from './dto/classroom.dto';
+import { update_ClassroomDto } from './dto/update_ClassroomDto.dto';
 
 @Injectable()
 export class ClassroomService {
-  create(createClassroomDto: CreateClassroomDto) {
+  create(createClassroomDto: ClassroomDto) {
     return 'This action adds a new classroom';
   }
 
@@ -16,11 +16,7 @@ export class ClassroomService {
     return `This action returns a #${id} classroom`;
   }
 
-  update(id: number, updateClassroomDto: UpdateClassroomDto) {
+  update(id: number, updateClassroomDto: update_ClassroomDto) {
     return `This action updates a #${id} classroom`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} classroom`;
   }
 }

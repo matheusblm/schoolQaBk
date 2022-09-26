@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateStudentScoreDto } from './dto/create-student_score.dto';
+import { StudentScoreDto } from './dto/student_score.dto';
 import { UpdateStudentScoreDto } from './dto/update-student_score.dto';
 
 @Injectable()
 export class StudentScoreService {
-  create(createStudentScoreDto: CreateStudentScoreDto) {
+  create(createStudentScoreDto: StudentScoreDto) {
     return 'This action adds a new studentScore';
   }
 
@@ -18,9 +18,5 @@ export class StudentScoreService {
 
   update(id: number, updateStudentScoreDto: UpdateStudentScoreDto) {
     return `This action updates a #${id} studentScore`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} studentScore`;
   }
 }

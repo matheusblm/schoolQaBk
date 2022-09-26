@@ -10,5 +10,6 @@ export class AskDto {
   @IsNotEmpty()
   topicsId: string;
   users?: UserDto[];
-  answers?: AnswerDto[];
+  @IsNotEmpty()
+  answers: AnswerDto[];
 }

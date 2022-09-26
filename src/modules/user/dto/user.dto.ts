@@ -19,6 +19,8 @@ export class UserDto {
   is_Professor?: boolean;
 
   student_answersId?: string;
+  @IsString()
+  @IsNotEmpty()
   classroomsId?: string;
   student_score: {
     score: number;

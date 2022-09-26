@@ -9,7 +9,9 @@ export class AskService {
     return await this.prisma.asks.create({
       data: {
         ...createAskDto,
+        answers: { create: createAskDto.answers },
       },
+      include: { answers: true },
     });
   }
 

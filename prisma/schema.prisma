@@ -50,12 +50,10 @@ model Asks {
   id              String            @id @default(uuid())
   title           String
   answers         Answers[]
-  Users           Users?            @relation(fields: [usersId], references: [id])
-  usersId         String?
+  Users           Users[]
   Topics          Topics?           @relation(fields: [topicsId], references: [id])
   topicsId        String?
-  Student_score   Student_score?    @relation(fields: [student_scoreId], references: [id])
-  student_scoreId String?
+  Student_score   Student_score[]
   Student_answers Student_answers[]
 }
 

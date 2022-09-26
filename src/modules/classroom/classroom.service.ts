@@ -14,12 +14,13 @@ export class ClassroomService {
   }
 
   async findAll() {
-    return await this.prisma.classrooms.findMany();
+    return await this.prisma.classrooms.findMany({ include: { Users: true } });
   }
 
   async findOne(id: string) {
     return await this.prisma.classrooms.findFirst({
       where: { id },
+      include: { Users: true },
     });
   }
 

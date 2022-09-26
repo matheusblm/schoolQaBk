@@ -31,6 +31,7 @@ model Classrooms {
 
 model Topics {
   id            String          @id @default(uuid())
+  title         String
   student_score Student_score[]
   asks          Asks[]
   Classrooms    Classrooms?     @relation(fields: [classroomsId], references: [id])

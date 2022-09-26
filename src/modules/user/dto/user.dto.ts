@@ -19,7 +19,7 @@ export class UserDto {
   is_Professor?: boolean;
 
   student_answersId?: string;
-
+  classroomsId?: string;
   student_score: {
     score: number;
   };

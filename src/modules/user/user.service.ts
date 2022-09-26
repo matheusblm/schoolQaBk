@@ -22,12 +22,19 @@ export class UserService {
       ...createUser,
       password: await bcrypt.hash(createUser.password, 10),
     };
+    const formatedUser = {
+      password: userWithPassword.password,
+      name: userWithPassword.name,
+      email: userWithPassword.email,
+      is_Professor: userWithPassword.is_Professor,
+    };
 
     const createdUser = await this.prisma.users.create({
       data: {
-        ...userWithPassword,
+        ...formatedUser,
         student_score: { create: { score: 0 } },
         is_Professor: professor,
+        classrom: { connect: { id: createUser.classroomsId } },
       },
     });
 

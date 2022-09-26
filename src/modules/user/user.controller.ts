@@ -8,14 +8,10 @@ export class UserController {
 
   @Post()
   create(
-    @Query('professor') professor: string,
+    @Query('professor') professor: boolean,
     @Body() createUserDto: UserDto,
   ) {
-    if (professor) {
-      return this.userService.create(createUserDto, true);
-    } else {
-      return this.userService.create(createUserDto, false);
-    }
+    return this.userService.create(createUserDto, professor);
   }
 
   @Get()

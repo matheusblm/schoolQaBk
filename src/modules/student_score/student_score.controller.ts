@@ -3,7 +3,7 @@ import { StudentScoreService } from './student_score.service';
 
 import { UpdateStudentScoreDto } from './dto/update-student_score.dto';
 
-@Controller('student-score')
+@Controller('student_score')
 export class StudentScoreController {
   constructor(private readonly studentScoreService: StudentScoreService) {}
 

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { StudentAnswerDto } from './dto/student_answer.dto';
 import { StudentAnswersService } from './student_answers.service';
 
-@Controller('student-answers')
+@Controller('student_answers')
 export class StudentAnswersController {
   constructor(private readonly studentAnswersService: StudentAnswersService) {}
 

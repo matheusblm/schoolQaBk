@@ -11,8 +11,8 @@ import { UserToken } from './models/UserToken';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly jwtService: JwtService,
     private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async login(user: UserDto): Promise<UserToken> {

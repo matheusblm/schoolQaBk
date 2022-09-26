@@ -12,6 +12,7 @@ import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
+    AuthModule,
     UserModule,
     ClassroomModule,
     TopicModule,
@@ -19,7 +20,6 @@ import { APP_GUARD } from '@nestjs/core';
     AskModule,
     AnswersModule,
     StudentAnswersModule,
-    AuthModule,
   ],
   controllers: [],
   providers: [

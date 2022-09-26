@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 
 import { IsPublic } from './decorators/is-public.decorator';
 import { AuthRequest } from './models/AuthRequest';
-import { LocalAuthGuard } from './strategies/local-auth.guard';
+import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Controller()
 export class AuthController {

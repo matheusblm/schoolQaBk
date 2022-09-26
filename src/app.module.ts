@@ -6,6 +6,9 @@ import { StudentScoreModule } from './modules/student_score/student_score.module
 import { AskModule } from './modules/ask/ask.module';
 import { AnswersModule } from './modules/answers/answers.module';
 import { StudentAnswersModule } from './modules/student_answers/student_answers.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -16,8 +19,14 @@ import { StudentAnswersModule } from './modules/student_answers/student_answers.
     AskModule,
     AnswersModule,
     StudentAnswersModule,
+    AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}

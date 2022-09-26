@@ -22,7 +22,7 @@ export class UserDto {
   @IsString()
   @IsNotEmpty()
   classroomsId?: string;
-  student_score: {
+  student_score?: {
     score: number;
   };
 }

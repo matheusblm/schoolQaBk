@@ -1,26 +1,45 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { UserDto } from './dto/user.dto';
+import { PrismaService } from 'src/database/prisma.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createUser: UserDto) {
+    const userExist = await this.prisma.users.findFirst({
+      where: {
+        email: createUser.email,
+      },
+    });
+
+    if (userExist) {
+      throw new BadRequestException('Usuário já cadastrado');
+    }
+
+    const userWithPassword = {
+      ...createUser,
+      password: await bcrypt.hash(createUser.password, 10),
+    };
+
+    const createdUser = await this.prisma.users.create({
+      data: {
+        ...userWithPassword,
+        student_score: { create: { score: 0 } },
+      },
+    });
+
+    return { ...createdUser, password: undefined };
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    return await this.prisma.users.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async findOne(id: string) {
+    return await this.prisma.users.findFirst({
+      where: { id },
+    });
   }
 }

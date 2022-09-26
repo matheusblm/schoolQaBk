@@ -38,12 +38,11 @@ model Topics {
 }
 
 model Student_score {
-  id       String  @id @default(uuid())
-  score    Float
-  asks     Asks[]
-  Users    Users[]
-  Topics   Topics? @relation(fields: [topicsId], references: [id])
-  topicsId String?
+  id     String   @id @default(uuid())
+  score  Float
+  asks   Asks[]
+  Users  Users[]
+  Topics Topics[]
 }
 
 model Asks {

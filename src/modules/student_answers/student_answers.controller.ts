@@ -18,6 +18,6 @@ export class StudentAnswersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.studentAnswersService.findOne(+id);
+    return this.studentAnswersService.findOne(id);
   }
 }

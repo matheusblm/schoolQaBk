@@ -1,17 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param } from '@nestjs/common';
 import { StudentScoreService } from './student_score.service';
 
 import { UpdateStudentScoreDto } from './dto/update-student_score.dto';
-import { StudentScoreDto } from './dto/student_score.dto';
 
 @Controller('student-score')
 export class StudentScoreController {
   constructor(private readonly studentScoreService: StudentScoreService) {}
-
-  @Post()
-  create(@Body() createStudentScoreDto: StudentScoreDto) {
-    return this.studentScoreService.create(createStudentScoreDto);
-  }
 
   @Get()
   findAll() {
@@ -20,7 +14,7 @@ export class StudentScoreController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.studentScoreService.findOne(+id);
+    return this.studentScoreService.findOne(id);
   }
 
   @Patch(':id')
@@ -28,6 +22,6 @@ export class StudentScoreController {
     @Param('id') id: string,
     @Body() updateStudentScoreDto: UpdateStudentScoreDto,
   ) {
-    return this.studentScoreService.update(+id, updateStudentScoreDto);
+    return this.studentScoreService.update(id, updateStudentScoreDto);
   }
 }

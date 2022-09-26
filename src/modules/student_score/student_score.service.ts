@@ -1,22 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { StudentScoreDto } from './dto/student_score.dto';
+import { PrismaService } from 'src/database/prisma.service';
 import { UpdateStudentScoreDto } from './dto/update-student_score.dto';
 
 @Injectable()
 export class StudentScoreService {
-  create(createStudentScoreDto: StudentScoreDto) {
-    return 'This action adds a new studentScore';
+  constructor(private prisma: PrismaService) {}
+
+  async findAll() {
+    return await this.prisma.student_score.findMany();
   }
 
-  findAll() {
-    return `This action returns all studentScore`;
+  async findOne(id: string) {
+    return await this.prisma.student_score.findFirst({
+      where: { id },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} studentScore`;
-  }
-
-  update(id: number, updateStudentScoreDto: UpdateStudentScoreDto) {
-    return `This action updates a #${id} studentScore`;
+  async update(id: string, updateStudentScoreDto: UpdateStudentScoreDto) {
+    return await this.prisma.student_score.update({
+      where: { id },
+      data: { ...updateStudentScoreDto },
+    });
   }
 }

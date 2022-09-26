@@ -1,1 +1,3 @@
-export class UpdateStudentScoreDto {}
+export class UpdateStudentScoreDto {
+  score?: number;
+}

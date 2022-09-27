@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { IsPublic } from '../auth/decorators/is-public.decorator';
 import { ClassroomService } from './classroom.service';
 import { ClassroomDto } from './dto/classroom.dto';
 import { update_ClassroomDto } from './dto/update_ClassroomDto.dto';
@@ -12,6 +13,7 @@ export class ClassroomController {
     return this.classroomService.create(createClassroomDto);
   }
 
+  @IsPublic()
   @Get()
   findAll() {
     return this.classroomService.findAll();

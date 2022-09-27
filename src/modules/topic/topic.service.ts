@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
+import { UserDto } from '../user/dto/user.dto';
 import { TopicDto } from './dto/topic.dto';
 import { UpdateTopicDto } from './dto/update_topic.dto';
 
@@ -33,5 +34,16 @@ export class TopicService {
         ...updateTopic,
       },
     });
+  }
+
+  async findByUsers(user: UserDto) {
+    const findUser = await this.prisma.users.findFirst({
+      where: { id: user.id },
+    });
+
+    const findTopics = await this.prisma.topics.findMany({
+      where: { classroomsId: findUser.classroomsId },
+    });
+    return findTopics;
   }
 }

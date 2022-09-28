@@ -7,14 +7,15 @@ import { StudentAnswerDto } from './dto/student_answer.dto';
 export class StudentAnswersService {
   constructor(private prisma: PrismaService) {}
   async create(createStudentAnswerDto: StudentAnswerDto, user: UserDto) {
-    const createAnswer = await this.prisma.student_answers.create({
-      data: {
-        ...createStudentAnswerDto,
-      },
-    });
     const findUser = await this.prisma.users.findFirst({
       where: {
         id: user.id,
+      },
+    });
+    const createAnswer = await this.prisma.student_answers.create({
+      data: {
+        ...createStudentAnswerDto,
+        usersId: findUser.id,
       },
     });
 
@@ -29,7 +30,7 @@ export class StudentAnswersService {
       },
     });
 
-    if (findCorrect.title == createStudentAnswerDto.title) {
+    if (findCorrect.id == createStudentAnswerDto.title) {
       await this.prisma.student_score.update({
         where: {
           id: findUser.student_scoreId,

@@ -66,9 +66,10 @@ model Answers {
 }
 
 model Student_answers {
-  id     String  @id @default(uuid())
-  title  String
-  ask    Asks    @relation(fields: [asksId], references: [id])
-  Users  Users[]
-  asksId String
+  id      String @id @default(uuid())
+  title   String
+  ask     Asks   @relation(fields: [asksId], references: [id])
+  User    Users  @relation(fields: [usersId], references: [id])
+  asksId  String
+  usersId String
 }

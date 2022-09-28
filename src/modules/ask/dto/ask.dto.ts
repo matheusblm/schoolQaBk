@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 import { AnswerDto } from 'src/modules/answers/dto/answer.dto';
-import { UserDto } from 'src/modules/user/dto/user.dto';
 
 export class AskDto {
   id?: string;
@@ -9,7 +8,7 @@ export class AskDto {
   @IsString()
   @IsNotEmpty()
   topicsId: string;
-  users?: UserDto[];
+  usersId?: string;
   @IsNotEmpty()
   answers: AnswerDto[];
 }

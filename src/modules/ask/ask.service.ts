@@ -19,7 +19,11 @@ export class AskService {
     return await this.prisma.asks.findMany();
   }
   async findLast() {
-    return await this.prisma.asks.findFirst();
+    const findAsks = await this.prisma.asks.findMany({
+      include: { Student_answers: true, answers: true, Users: true },
+    });
+
+    return findAsks[findAsks.length - 1];
   }
   async findOne(id: string) {
     return await this.prisma.asks.findFirst({ where: { id } });

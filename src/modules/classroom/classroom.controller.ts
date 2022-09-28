@@ -1,5 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { IsPublic } from '../auth/decorators/is-public.decorator';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { UserDto } from '../user/dto/user.dto';
 import { ClassroomService } from './classroom.service';
 import { ClassroomDto } from './dto/classroom.dto';
 import { update_ClassroomDto } from './dto/update_ClassroomDto.dto';
@@ -17,6 +19,11 @@ export class ClassroomController {
   @Get()
   findAll() {
     return this.classroomService.findAll();
+  }
+
+  @Get('/student')
+  findByStudent(@CurrentUser() user: UserDto) {
+    return this.classroomService.findByUser(user);
   }
 
   @Get(':id')

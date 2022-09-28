@@ -15,6 +15,10 @@ export class AskController {
   findAll() {
     return this.askService.findAll();
   }
+  @Get('last')
+  lastAsk() {
+    return this.askService.findLast();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

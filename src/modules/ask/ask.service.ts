@@ -18,7 +18,9 @@ export class AskService {
   async findAll() {
     return await this.prisma.asks.findMany();
   }
-
+  async findLast() {
+    return await this.prisma.asks.findFirst();
+  }
   async findOne(id: string) {
     return await this.prisma.asks.findFirst({ where: { id } });
   }
